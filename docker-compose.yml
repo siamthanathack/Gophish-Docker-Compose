@@ -1,0 +1,15 @@
+version: "3.7"
+services:
+  gophish:
+    image: cisagov/gophish:0.0.8
+    container_name: gophish
+    ports:
+      - "3333:3333"
+      - "8081:80"
+    volumes:
+      - ./config.json:/config.json:ro
+      - ./gophish.db:/gophish.db
+    env_file:
+      - .env
+    command: ["--config", "/config.json"]
+    restart: unless-stopped
